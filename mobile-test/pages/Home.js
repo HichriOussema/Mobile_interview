@@ -1,11 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import UsersList from '../UsersList';
 
-function Home () {
-    return (
-        <View>
-            <Text>Home page</Text>
-        </View>
-    );
+function Home ({navigation}) {
+    return <UsersList navigation={navigation} />;
 }
 export default Home;
