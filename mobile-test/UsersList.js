@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity,FlatList } from 'react-native';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import UserItem from './UserItem';
+import { styles } from './styles';
 
 function UsersList({navigation}) {
 
@@ -16,14 +18,20 @@ function UsersList({navigation}) {
     if (error) return <Text>An error occurred{error.message}</Text>;
     if (!data) return <Text>No data to display</Text>;
 
+    const renderItem = ({ item }) => (
+      <UserItem 
+      user={item} 
+      onPress={() => navigation.navigate('Details', { user: item })}
+    />
+    );
+
 return(
-   <View>
-      {data.map(user => (
-        <TouchableOpacity key={user._id} onPress={() => navigation.navigate('Details', { user: user })}>
-          <Text>{user.name}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={item => item._id}
+      style={styles.container}
+    />
 );
 }
 
