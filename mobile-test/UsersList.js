@@ -19,7 +19,7 @@ function UsersList({navigation}) {
 return(
    <View>
       {data.map(user => (
-        <TouchableOpacity key={user._id} onPress={() => navigation.navigate('Details', { userId: user._id })}>
+        <TouchableOpacity key={user._id} onPress={() => navigation.navigate('Details', { user: user })}>
           <Text>{user.name}</Text>
         </TouchableOpacity>
       ))}
